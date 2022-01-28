@@ -3,17 +3,23 @@
 	import "codemirror/mode/gfm/gfm";
 	import "codemirror/keymap/vim";
 
-	import { mdText } from "../../store";
-	import { onMount } from "svelte";
+    import { mdText, writeMode } from "../../store";
+	import { onMount } from 'svelte';
+	
+
 	const options = {
 		mode: "qml",
 		lineNumbers: true,
 		value: $mdText,
-		keyMap: "vim",
-	};
+        keyMap: 'vim',
+		lineWrapping: true
+	}
 	let editor;
-	let cursor_activity = false;
-	onMount(() => {
+	$: if (editor) {
+		writeMode.subscribe(m => editor.setOption("keyMap", m));
+	}
+	let cursor_activity = false
+	onMount(()=>{
 		console.log("Editor: ", editor);
 	});
 
