@@ -1,6 +1,10 @@
 :root {
-	--main-color: #F14A16;
-	--main-color-lighter: #f14916d2;
+	--main-color: #fe5e52;
+	--main-color-lighter: #fe5d52d8;
+	--main-grey: #333745;
+	--accent-pink: #E63462;
+	--accent-blue: #C7EFCF;
+	--accent-beige: #EEF5DB;
 	--background-color: #131313;
 }
 ::-webkit-scrollbar {

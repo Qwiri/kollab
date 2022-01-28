@@ -8,7 +8,7 @@
 	
 
 	const options = {
-		mode: "qml",
+		mode: "gfm",
 		lineNumbers: true,
 		value: $mdText,
         keyMap: 'vim',
