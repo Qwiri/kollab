@@ -65,7 +65,7 @@
     :global(.CodeMirror) {
         /* Set height, width, borders, and global font properties here */
         font-family: monospace;
-        height: 100%;
+        height: 100vh;
         direction: ltr;
         color: var(--cm-text-color);
         background: var(--cm-background-color);

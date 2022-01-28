@@ -57,13 +57,13 @@
 
 		.fullscreenY {
 			min-height: 100vh;
-			height: 100%;
 		}
 		.halfScreen {
 			padding: 0.5rem;
 			overflow-wrap: break-word;
 			flex-grow: 1;
 			width: 40%;
+			min-width: 420px;
 		}
 
 		.growPls {
