@@ -12,18 +12,32 @@
 			<WriteField />
 		</div>
 		<div id="settings">
-			<label>
-				WYSIWYG?
-				<input type="checkbox" name="wysiwyg" bind:checked={wysiwyg} />
-			</label>
-			<label>
-				Mode?
-				<select bind:value={$writeMode}>
-					<option>default</option>
-					<option>vim</option>
-					<option>emacs</option>
-				</select>
-			</label>
+			<h1>Settings</h1>
+			<table>
+				<tr>
+					<td>
+						<label for="wysiwyg">WYSIWYG?</label>
+					</td>
+					<td>
+						<input type="checkbox" name="wysiwyg" bind:checked={wysiwyg} />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="writeMode">
+							Mode?
+						</label>
+					</td>
+					<td>
+						<select name="writeMode" bind:value={$writeMode}>
+							<option>default</option>
+							<option>vim</option>
+							<option>emacs</option>
+						</select>
+					</td>
+
+				</tr>
+			</table>
 		</div>
 	</div>
 	{#if wysiwyg}
@@ -59,6 +73,20 @@
 
 		select {
 			color: white;
+		}
+		#settings {
+
+			h1 {
+				margin-top: 0;
+			}
+			border-radius: .2rem;
+			border: 2px solid var(--main-grey);
+			padding: .5rem;
+			padding-left: 2rem;
+
+			table {
+				text-align: center;
+			}
 		}
 	}
 </style>
