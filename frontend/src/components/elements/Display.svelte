@@ -48,4 +48,7 @@
     :global(th, td) {
         padding: .5rem;
     }
+    :global(img) {
+        max-width: 100%;
+    }
 </style>
