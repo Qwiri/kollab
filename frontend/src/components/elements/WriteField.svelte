@@ -1,11 +1,16 @@
 <script lang="ts">
-	import CodeMirror from "./CodeMirror.svelte";
-	import "codemirror/mode/gfm/gfm";
-	import "codemirror/keymap/vim";
+	import CodeMirrorEditor from "./CodeMirrorEditor.svelte";
 
-    import { mdText, writeMode } from "../../store";
+    import { language, mdText, writeMode } from "../../store";
 	import { onMount } from 'svelte';
 	
+    import CodeMirror from "codemirror";
+
+	// supported languages
+	import "codemirror/mode/gfm/gfm";
+	import "codemirror/mode/javascript/javascript";
+
+	import "codemirror/keymap/vim";
 
 	const options = {
 		mode: "gfm",
@@ -15,9 +20,21 @@
 		lineWrapping: true
 	}
 	let editor;
+	
 	$: if (editor) {
 		writeMode.subscribe(m => editor.setOption("keyMap", m));
+		language.subscribe(switchLanguage);
 	}
+
+	function switchLanguage(lang: string) {
+		if (!CodeMirror.modes[lang]) {
+			console.error("Language", lang, "not loaded.");
+			return;
+		}
+		console.log("Switching to language: " + lang);
+		editor.setOption("mode", lang);
+	}
+
 	let cursor_activity = false
 	onMount(()=>{
 		console.log("Editor: ", editor);
@@ -34,7 +51,7 @@
 	}
 </script>
 
-<CodeMirror
+<CodeMirrorEditor
 	on:activity={cursorMoved}
 	on:change={changed}
 	bind:editor

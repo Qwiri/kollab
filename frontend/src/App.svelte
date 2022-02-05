@@ -1,7 +1,7 @@
 <script>
 	import Display from "./components/elements/Display.svelte";
 	import WriteField from "./components/elements/WriteField.svelte";
-	import { writeMode } from "./store";
+	import { language, writeMode } from "./store";
 
 	let wysiwyg = true;
 </script>
@@ -36,6 +36,14 @@
 						</select>
 					</td>
 
+				</tr>
+				<tr>
+					<td>
+						<label for="lang">Lang</label>
+					</td>
+					<td>
+						<input type="text" name="lang" bind:value={$language} />
+					</td>
 				</tr>
 			</table>
 		</div>

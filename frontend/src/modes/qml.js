@@ -20,7 +20,8 @@ export function registerQML(CodeMirror) {
         const atomNames = [
             "ja", "yes", "true",
             "nein", "no", "false",
-            "ausgabe", "print"
+            "ausgabe", "print",
+            "setze", "auf"
         ]
         let atoms = {};
         atomNames.forEach((e) => atoms[e] = true);
