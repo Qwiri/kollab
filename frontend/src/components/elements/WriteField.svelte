@@ -1,28 +1,29 @@
 <script lang="ts">
 	import CodeMirrorEditor from "./CodeMirrorEditor.svelte";
 
-    import { language, mdText, writeMode } from "../../store";
-	import { onMount } from 'svelte';
-	
-    import CodeMirror from "codemirror";
+	import { mdText } from "../../store";
+	import { onMount } from "svelte";
+
+	import CodeMirror from "codemirror";
 
 	// supported languages
 	import "codemirror/mode/gfm/gfm";
 	import "codemirror/mode/javascript/javascript";
 
 	import "codemirror/keymap/vim";
+	import { language, writeMode } from "../../editorPref";
 
 	const options = {
 		mode: "gfm",
 		lineNumbers: true,
 		value: $mdText,
-        keyMap: 'vim',
-		lineWrapping: true
-	}
+		keyMap: "vim",
+		lineWrapping: true,
+	};
 	let editor;
-	
+
 	$: if (editor) {
-		writeMode.subscribe(m => editor.setOption("keyMap", m));
+		writeMode.subscribe((m) => editor.setOption("keyMap", m));
 		language.subscribe(switchLanguage);
 	}
 
@@ -35,8 +36,8 @@
 		editor.setOption("mode", lang);
 	}
 
-	let cursor_activity = false
-	onMount(()=>{
+	let cursor_activity = false;
+	onMount(() => {
 		console.log("Editor: ", editor);
 	});
 
