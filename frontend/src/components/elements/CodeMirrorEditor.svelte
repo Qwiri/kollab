@@ -1,10 +1,12 @@
 <script>
     import { onMount } from "svelte";
     import { createEventDispatcher } from "svelte";
+    import { registerQML } from "../../modes/qml";
+
     import CodeMirror from "codemirror";
+    registerQML(CodeMirror);
 
     const dispatch = createEventDispatcher();
-
 
     export let editor = null;
     export let options = {};
@@ -23,6 +25,7 @@
         if (editor) element.innerHTML = "";
 
         editor = CodeMirror(element, options);
+
         editor.on("cursorActivity", (event) => {
             dispatch("activity", event);
         });
@@ -36,7 +39,6 @@
 <div bind:this={element} class="editorWrapper" />
 
 <style unscoped>
-
     .editorWrapper {
         min-height: 100%;
     }
@@ -63,7 +65,7 @@
     :global(.CodeMirror) {
         /* Set height, width, borders, and global font properties here */
         font-family: monospace;
-        height: 100%;
+        height: 100vh;
         direction: ltr;
         color: var(--cm-text-color);
         background: var(--cm-background-color);

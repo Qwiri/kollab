@@ -38,14 +38,17 @@
     }
 
     :global(hr) {
-        border: 1px solid white;
-        background-color: white;
+        border: 1px solid var(--main-grey);
+        background-color: var(--main-grey);
     }
     :global(table, th, td) {
-        border: 2px solid white;
+        border: 2px solid var(--main-grey);
         border-collapse: collapse;
     }
     :global(th, td) {
         padding: .5rem;
+    }
+    :global(img) {
+        max-width: 100%;
     }
 </style>

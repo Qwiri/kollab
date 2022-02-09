@@ -1,36 +1,60 @@
 <script lang="ts">
+	import CodeMirrorEditor from "./CodeMirrorEditor.svelte";
 
-	import CodeMirror from './CodeMirror.svelte'
-	import 'codemirror/mode/gfm/gfm';
-	import 'codemirror/keymap/vim';
+	import { mdText } from "../../store";
+	import { onMount } from "svelte";
 
-    import { mdText } from "../../store";
-	import {onMount} from 'svelte'
-	const code = `function test() {\n  return 42\n}`
-	const codee = `# Test\n- test\n- test`
+	import CodeMirror from "codemirror";
+
+	// supported languages
+	import "codemirror/mode/gfm/gfm";
+	import "codemirror/mode/javascript/javascript";
+
+	import "codemirror/keymap/vim";
+	import { language, writeMode } from "../../editorPref";
+
 	const options = {
 		mode: "gfm",
 		lineNumbers: true,
 		value: $mdText,
-        keyMap: 'vim'
+		keyMap: "vim",
+		lineWrapping: true,
+	};
+	let editor;
+
+	$: if (editor) {
+		writeMode.subscribe((m) => editor.setOption("keyMap", m));
+		language.subscribe(switchLanguage);
 	}
-	let editor
-	let cursor_activity = false
-	onMount(()=>{
+
+	function switchLanguage(lang: string) {
+		if (!CodeMirror.modes[lang]) {
+			console.error("Language", lang, "not loaded.");
+			return;
+		}
+		console.log("Switching to language: " + lang);
+		editor.setOption("mode", lang);
+	}
+
+	let cursor_activity = false;
+	onMount(() => {
 		console.log("Editor: ", editor);
-	})
-	
+	});
+
 	function cursorMoved(event) {
 		cursor_activity = true;
-		console.log('cursor activity');
-		
+		console.log("cursor activity");
 	}
-	
+
 	function changed(event) {
-		console.log('changed');
-        $mdText = editor.doc.getValue();
+		console.log("changed");
+		$mdText = editor.doc.getValue();
 	}
-	
 </script>
 
-<CodeMirror on:activity={cursorMoved} on:change={changed} bind:editor {options} />
+<CodeMirrorEditor
+	on:activity={cursorMoved}
+	on:change={changed}
+	bind:editor
+	{options}
+/>
