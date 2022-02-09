@@ -3,6 +3,11 @@
 	import Display from "./components/elements/Display.svelte";
 	import WriteField from "./components/elements/WriteField.svelte";
 	import { enableWYSIWYG } from "./editorPref";
+	
+
+	window.onbeforeunload = function(_) {
+    	return confirm("Confirm refresh");
+	};
 </script>
 
 <main>
